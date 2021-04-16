@@ -12,10 +12,16 @@ class BukuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $buku = Buku::paginate(5);
-        $posts = Buku::orderBy('id_buku', 'asc')->paginate(5);
+        $cari = $request->get('cari');
+        if ($cari) {
+            $buku = Buku::where("judul", "LIKE", "%$cari%")->paginate(5);
+        } else {
+            $buku = Buku::paginate(5);
+        }
+
+        $posts = Buku::orderBy('id_buku', 'asc')->paginate(6);
         return view('buku.index', compact('buku'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }

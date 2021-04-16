@@ -23,6 +23,14 @@
                             <div class="float-right my-2">
                                 <a class="btn btn-success" href="{{ route('home.create') }}"> Input Buku</a>
                             </div>
+                            <form action="{{route('home.index')}}" class="row g-3" method="GET">
+                                <div class="col-auto">
+                                  <input name="cari" type="cari" class="form-control" id="inputcari" placeholder="cari">
+                                </div>
+                                <div class="col-auto">
+                                  <button type="submit" class="btn btn-primary mb-3">Cari data</button>
+                                </div>
+                              </form>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
